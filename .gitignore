@@ -1,5 +1,6 @@
-# Compiled Python files
+# Python stuff
 *.pyc
+*.egg-info
 
 # Folder view configuration files
 .DS_Store

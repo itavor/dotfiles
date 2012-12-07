@@ -1,6 +1,3 @@
-# Add `~/bin` to the `$PATH`
-export PATH="$HOME/bin:$PATH"
-
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.
@@ -12,18 +9,39 @@ unset file
 # Case-insensitive globbing (used in pathname expansion)
 shopt -s nocaseglob
 
+# Use extended pattern matching when globbing
+shopt -s extglob
+
 # Append to the Bash history file, rather than overwriting it
 shopt -s histappend
+
+# Allow editing of history substitution result
+shopt -s histverify
+
+# Allow editing of failed history substitution
+shopt -s histreedit
+
+# Save all lines of a multiline command in one history entry
+shopt -s cmdhist
+
+# do not search $PATH when a completion is attempted on an empty line
+shopt -s no_empty_cmd_completion
+
+# `.` and `source` commands search $PATH in order to find the file to read
+shopt -s sourcepath
 
 # Autocorrect typos in path names when using `cd`
 shopt -s cdspell
 
-# Enable some Bash 4 features when possible:
-# * `autocd`, e.g. `**/qux` will enter `./foo/bar/baz/qux`
-# * Recursive globbing, e.g. `echo **/*.txt`
-for option in autocd globstar; do
-	shopt -s "$option" 2> /dev/null
-done
+# Autocd, e.g. `**/qux` will enter `./foo/bar/baz/qux`
+shopt -s cdspell
+
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+# Recursive globbing, e.g. `echo **/*.txt`
+shopt -s globstar
 
 # Prefer US English and use UTF-8
 export LC_ALL="en_US.UTF-8"
@@ -41,3 +59,6 @@ complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes Syste
 
 # If possible, add tab completion for many more commands
 [ -f /etc/bash_completion ] && source /etc/bash_completion
+
+# Add virtualenvwrapper commands
+[ $WORKON_HOME ] && source $WORKON_HOME/.virtualenvwrapper_bashrc
