@@ -125,3 +125,9 @@ done
 
 # Use hub if available
 command -v hub > /dev/null 2>&1 && alias git=hub
+
+# WebFaction account stats
+if [[ "$HOSTNAME" =~ webfaction ]]; then
+    alias memcheck='ps -u $LOGNAME -o pid,rss,command'
+    alias memtotal="ps -u $LOGNAME h -o rss | (tr '\n' +; echo 0) | bc"
+fi
