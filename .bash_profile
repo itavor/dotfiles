@@ -40,9 +40,6 @@ shopt -s cdspell
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
-# Recursive globbing, e.g. `echo **/*.txt`
-shopt -s globstar
-
 # Prefer US English and use UTF-8
 export LC_ALL="en_US.UTF-8"
 export LANG="en_US"
@@ -61,4 +58,4 @@ complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes Syste
 [ -f /etc/bash_completion ] && source /etc/bash_completion
 
 # Add virtualenvwrapper commands
-[ $WORKON_HOME ] && source $WORKON_HOME/.virtualenvwrapper_bashrc
+[ $WORKON_HOME ] && [ -f .virtualenvwrapper_bashrc ] && source $WORKON_HOME/.virtualenvwrapper_bashrc
