@@ -31,6 +31,7 @@
     reb = "!r() { git rebase -i HEAD~$1; }; r"
     # Undo a `git push`
     undopush = push -f origin HEAD^:master
+    undo-commit = reset --soft HEAD^
 
 [apply]
     # Detect whitespace errors when applying a patch
@@ -41,7 +42,8 @@
     excludesfile = ~/.gitignore
     attributesfile = ~/.gitattributes
     # Treat spaces before tabs, lines that are indented with 8 or more spaces, and all kinds of trailing whitespace as an error
-    whitespace = space-before-tab,indent-with-non-tab,trailing-space
+    whitespace = space-before-tab,indent-with-non-tab,trailing-space,cr-at-eol
+    autocrlf = false
 
 [color]
     # Use colors in Git commands that are capable of colored output when outputting to the terminal
@@ -84,3 +86,19 @@
 
 [push]
     default = matching
+
+[filter "media"]
+	required = true
+	clean = git media clean %f
+	smudge = git media smudge %f
+
+[http]
+	sslCAinfo = ~/certs/cacert.pem
+
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path =
+
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
